@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes, Op } = require('sequelize');
   // Passing parameters separately (other dialects)
-  const sequelize = new Sequelize('rizwan', 'root', '12345'
+  const sequelize = new Sequelize('acadmy', 'root', '12345'
   ,
   {
     host: 'localhost',
@@ -26,7 +26,7 @@ const { Sequelize, DataTypes, Op } = require('sequelize');
   }
   db.userModel = require('./userModel')(sequelize,DataTypes, Op);
   //db.companyModel =  require('./companyModel')(sequelize,DataTypes,Op);
-  db.sequelize.sync({alter:false})
+  db.sequelize.sync({alter:true})
   .then(() => {
     console.log('Table .... are syncronized');
   })

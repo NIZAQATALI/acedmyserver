@@ -1,113 +1,16 @@
 
-const { createRandomHexColor } = require("./helperMethods");
+//const { createRandomHexColor } = require("./helperMethods");
 var db = require('../modals/index.js');
 var  User =  db.userModel;
 const axios = require("axios");
 const cron = require('node-cron');
 const register = async (user, callback) => {
   try {
-    const newUser = await User.create({ ...user, });
-newUser.record_id=newUser.id;
-const step = user.step;
-newUser.process_1=true;
+    const newUser = await User.create({...user});
  await newUser.save();
-    callback(null, { message: "User created successfully!", "NewRecord": newUser.record_id});
-    console.log("uuwaqasuuuuuu", user.step)      // Call sendEmail function with user data
-  //   if (user.step === '0') {
-  //     console.log("uuwaqasssssssssuuuuuuuuuuuuuuuuuu", user.step)      // Call sendEmail function with user data
-  //  await  sendEmail();
-  //   }
-  // if (user.step === '0') {
-  //   console.log("uuwaqasssssssssssssssssuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu", user.step);
-  //   try {
-  //     // Make an HTTP POST request to https://app.setczone.com/api/user/sendEmail
-  //     await axios.post('https://app.setczone.com/api/user/sendEmail', {
-  //       // Include any data you want to send in the request body
-  //       // For example, you might want to send user data
-        
-  //     });
+    callback(null, { message: "User created successfully!"});
+    console.log("new user")      // Call sendEmail function with user data
   
-  //     console.log('HTTP POST request to https://app.setczone.com/api/user/sendEmail successful');
-  //   } catch (error) {
-  //     console.error('Error making HTTP POST request:', error.message);
-  //   }
-  // }
-  let fn = user.first_name;
-  let ln = user.last_name;
-  let mn = user.middle_name;
-  let em = user.email;
-  {
-    console.log("user", user);
-  
-    try {
-      // Make an HTTP POST request to https://app.setczone.com/api/user/sendEmail
-      const response = await axios.post('https://app.setczone.com/api/user/sendEmailreg',{
-        // Include any data you want to send in the request body
-        // For example, you might want to send user data
-        user
-      });
-      // Check if the response indicates success (adjust the condition based on your API response)
-      if (response.status === 200) {
-        console.log('HTTP POST request to https://app.setczone.com/api/user/sendEmailRegister successful');
-        // Do something with the response data if needed
-        // For example, you can access it using response.data
-      } else {
-        // Handle unexpected response status
-        console.error('Unexpected HTTP response status:', response.status);
-      }
-    } catch (error) {
-      // Handle network errors, request timeouts, or any other errors
-      console.error('Error making HTTP POST request:', error.message);
-    }
-  } 
- 
-   {
-    
-    try {
-      // Make an HTTP POST request to https://app.setczone.com/api/user/sendEmail
-      const response = await axios.post('https://app.setczone.com/api/user/senduserEmail',{
-        // Include any data you want to send in the request body
-        // For example, you might want to send user data
-        user
-      });
-      // Check if the response indicates success (adjust the condition based on your API response)
-      if (response.status === 200) {
-        console.log('HTTP POST request to https://app.setczone.com/api/user/senduserEmail successful');
-        // Do something with the response data if needed
-        // For example, you can access it using response.data
-      } else {
-        // Handle unexpected response status
-        console.error('Unexpected HTTP response status:', response.status);
-      }
-    } catch (error) {
-      // Handle network errors, request timeouts, or any other errors
-      console.error('Error making HTTP POST request:', error.message);
-    }
-  }
-  {
-  
-  
-    try {
-      // Make an HTTP POST request to https://app.setczone.com/api/user/sendEmail
-      const response = await axios.post('https://app.setczone.com/api/user/sendprocessemail',{
-        // Include any data you want to send in the request body
-        // For example, you might want to send user data
-      process:"Application Started" ,fn:fn,ln:ln,mn:mn,em:em
-      });
-      // Check if the response indicates success (adjust the condition based on your API response)
-      if (response.status === 200) {
-        console.log('HTTP POST request to https://app.setczone.com/api/user/sendprocessemail successful');
-        // Do something with the response data if needed
-        // For example, you can access it using response.data
-      } else {
-        // Handle unexpected response status
-        console.error('Unexpected HTTP response status:', response.status);
-      }
-    } catch (error) {
-      // Handle network errors, request timeouts, or any other errors
-      console.error('Error making HTTP POST request:', error.message);
-    }
-  }
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       const uniqueViolation = err.errors.find(error => error.type === 'unique violation');
