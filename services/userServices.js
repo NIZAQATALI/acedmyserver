@@ -9,8 +9,7 @@ const register = async (user, callback) => {
     const newUser = await User.create({...user});
  await newUser.save();
     callback(null, { message: "User created successfully!"});
-    console.log("new user")      // Call sendEmail function with user data
-  
+    console.log("new user created successfully") 
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       const uniqueViolation = err.errors.find(error => error.type === 'unique violation');
@@ -31,7 +30,7 @@ const register = async (user, callback) => {
 const login = async (email, callback) => {
   try {
     const user = await User.findOne({ where: { email } });
-    if (!user) return callback({ errMessage: "Your email is wrong!" });
+    if (!user) return callback({ errMessage: "Your email is not found" });
     
     console.log("userrrrrrrrrrrrrrrrr",user.toJSON());
     return callback(false, user.toJSON());
